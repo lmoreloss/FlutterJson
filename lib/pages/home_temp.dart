@@ -1,6 +1,9 @@
 import '../utils/icono_string_util.dart';
 import 'package:flutter/material.dart';
 import '../providers/menu_provider.dart';
+import 'alert_page.dart';
+import 'avatar_page.dart';
+import 'card_page.dart';
 
 class HomepageTemp extends StatelessWidget {
 
@@ -104,7 +107,21 @@ class HomepageTemp extends StatelessWidget {
         leading: getIcon(opt['icon']),
         trailing: Icon(Icons.keyboard_arrow_right_sharp, color: Colors.blueAccent),
         onTap: () {
-          showDialog(context: context, builder: (BuildContext context)=> _buildPopUpDialog(context, opt['texto'])); //Un contexto es la pagina actual
+          //showDialog(context: context, builder: (BuildContext context)=> _buildPopUpDialog(context, opt['texto'])); //Un contexto es la pagina actual
+          switch (opt['ruta']) {
+            case 'avatar':
+              final route = MaterialPageRoute(builder: (context)=> AvatarPage());
+              Navigator.push(context, route);
+              break;
+            case 'alert':
+              final route = MaterialPageRoute(builder: (context)=> AlertPage());
+              Navigator.push(context, route); 
+              break;
+            case 'card':
+              final route = MaterialPageRoute(builder: (context)=> CardPage());
+              Navigator.push(context, route); 
+              break;
+          }
         },
       );
       lista
@@ -114,6 +131,7 @@ class HomepageTemp extends StatelessWidget {
      });
     return lista; //regress lista, que es un objeto de tipo list
   }
+
 
 
   Widget _buildPopUpDialog(BuildContext context, String opt) { //se crea un widget de nombre _buuildPopUpDialog con los parametros BuildContext y String
