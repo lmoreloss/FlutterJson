@@ -1,69 +1,81 @@
 import 'package:flutter/material.dart';
-class AvatarPage extends StatelessWidget {
-  const AvatarPage({Key key}) : super(key: key);
+import '../avatars/circular.dart';
+import '../avatars/circular_borde.dart';
+import '../avatars/rectangulo.dart';
+import '../avatars/rectangulo_borde.dart';
 
+class AvatarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Avatar Page'),
+        title: Text('AvatarPage'),
+        backgroundColor: Colors.deepOrangeAccent,
       ),
-      body: ListView(
-        children: <Widget>[
-
-          GestureDetector(
-            onTap: () {
-              showDialog(context: context, builder: (BuildContext context)=>_buildPopUpDialog(context, NetworkImage('https://cdn.icon-icons.com/icons2/195/PNG/256/YouTube_23392.png')));
-            },
-            child: CircleAvatar(
-              child: CircleAvatar(
-                backgroundImage: NetworkImage('https://cdn.icon-icons.com/icons2/195/PNG/256/YouTube_23392.png'),
-              )
-            )
+      body: (ListView(
+        children: [
+          Container(
+            child: ListTile(
+              title: Text('Avatar Circular'),
+              leading: Icon(Icons.account_circle),
+              trailing: Icon(
+                Icons.keyboard_arrow_right_sharp,
+                color: Colors.blue,
+              ),
+              onTap: () {
+                final route =
+                    MaterialPageRoute(builder: (context) => CircularAvatar());
+                    Navigator.push(context, route);
+              },
+            ),
           ),
-
-          GestureDetector(
-            onTap: () {
-              showDialog(context: context, builder: (BuildContext context)=>_buildPopUpDialog(context, NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Wikipedia_article_icon_BLACK.svg/1200px-Wikipedia_article_icon_BLACK.svg.png')));
-            },
-            child: CircleAvatar(
-              child: CircleAvatar(
-                backgroundImage: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Wikipedia_article_icon_BLACK.svg/1200px-Wikipedia_article_icon_BLACK.svg.png'),
-              )
-            )
+          Container(
+            child: ListTile(
+              title: Text('Avatar circular con borde'),
+              leading: Icon(Icons.account_circle),
+              trailing: Icon(
+                Icons.keyboard_arrow_right_sharp,
+                color: Colors.blue,
+              ),
+              onTap: () {
+                final route =
+                    MaterialPageRoute(builder: (context) => CircularAvatarBorde());
+                    Navigator.push(context, route);
+              },
+            ),
           ),
-
-
-
+          Container(
+            child: ListTile(
+              title: Text('Avatar rectangulo'),
+              leading: Icon(Icons.account_circle),
+              trailing: Icon(
+                Icons.keyboard_arrow_right_sharp,
+                color: Colors.blue,
+              ),
+              onTap: () {
+                final route =
+                    MaterialPageRoute(builder: (context) => RectangularAvatar());
+                    Navigator.push(context, route);
+              },
+            ),
+          ),
+          Container(
+            child: ListTile(
+              title: Text('Avatar rectangular con borde'),
+              leading: Icon(Icons.account_circle),
+              trailing: Icon(
+                Icons.keyboard_arrow_right_sharp,
+                color: Colors.blue,
+              ),
+              onTap: () {
+                final route =
+                    MaterialPageRoute(builder: (context) => RectangularAvatarBorde());
+                    Navigator.push(context, route);
+              },
+            ),
+          ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildPopUpDialog(BuildContext context, NetworkImage icono) { //se crea un widget de nombre _buuildPopUpDialog con los parametros BuildContext y String
-    return new AlertDialog( //se regresa un nuevo dialogo de alerta
-      title: const Text('Me diste click'),
-      content: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          CircleAvatar(
-              child: CircleAvatar(
-                backgroundImage: icono,
-                radius: 500.0,
-              )
-            )
-        ],
-      ),
-      actions: <Widget>[
-        new FlatButton( //se crea un flatbutton
-          onPressed: () { //cuando se presiona
-            Navigator.of(context).pop(); //revienta el mensaje
-          },
-          textColor: Theme.of(context).primaryColor,
-          child: const Text('Cerrar'),
-        ),
-      ],
+      )),
     );
   }
 }
